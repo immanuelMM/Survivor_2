@@ -847,11 +847,14 @@ footer {
   }
 }
 :root {
-  --particular-ad: url("assets/image/survivor_ref/home2.jpg");
+  --particular-ad: url("assets/image/sd4.jpg");
 }
 @media (max-width: 768px) {
   :root {
     --particular-ad: url("assets/image/survivor_ref/survivor_book1.png");
+  }
+  .logo-bright {
+    visibility: hidden;
   }
 }
 .solid-nav {
