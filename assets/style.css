@@ -847,7 +847,7 @@ footer {
   }
 }
 :root {
-  --particular-ad: url("assets/image/sd4.jpg");
+  --particular-ad: url("assets/image/sd2.jpg");
 }
 @media (max-width: 768px) {
   :root {
