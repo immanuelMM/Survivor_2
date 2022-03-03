@@ -848,6 +848,7 @@ footer {
 }
 :root {
   --particular-ad: url("assets/image/sd2.jpg");
+  height: 1000px;
 }
 @media (max-width: 768px) {
   :root {
