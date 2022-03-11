@@ -82,28 +82,85 @@ reveal();
   // start the text animation
 //   StartTextAnimation(0);
 // });
-window.addEventListener('load', videoScroll);
-window.addEventListener('scroll', videoScroll);
+// window.addEventListener('load', videoScroll);
+// window.addEventListener('scroll', videoScroll);
 
-function videoScroll() {
+// function videoScroll() {
 
-  if ( document.querySelectorAll('video[autoplay]').length > 0) {
-    var windowHeight = window.innerHeight,
-        videoEl = document.querySelectorAll('video[autoplay]');
+//   if ( document.querySelectorAll('iframe[autoplay]').length > 0) {
+//     var windowHeight = window.innerHeight,
+//         videoEl = document.querySelectorAll('iframe[autoplay]');
 
-    for (var i = 0; i < videoEl.length; i++) {
+//     for (var i = 0; i < videoEl.length; i++) {
 
-      var thisVideoEl = videoEl[i],
-          videoHeight = thisVideoEl.clientHeight,
-          videoClientRect = thisVideoEl.getBoundingClientRect().top;
+//       var thisVideoEl = videoEl[i],
+//           videoHeight = thisVideoEl.clientHeight,
+//           videoClientRect = thisVideoEl.getBoundingClientRect().top;
 
-      if ( videoClientRect <= ( (windowHeight) - (videoHeight*.5) ) && videoClientRect >= ( 0 - ( videoHeight*.5 ) ) ) {
-        thisVideoEl.play();
-      } else {
-        thisVideoEl.pause();
-      }
+//       if ( videoClientRect <= ( (windowHeight) - (videoHeight*.5) ) && videoClientRect >= ( 0 - ( videoHeight*.5 ) ) ) {
+//         thisVideoEl.play();
+//       } else {
+//         thisVideoEl.pause();
+//       }
 
-    }
-  }
+//     }
+//   }
 
-}
+// }
+
+window.onload=function(){
+  var LoadVideo = function(player_id){
+      var Program = {
+
+          Init: function(){
+              this.NewPlayer();
+              this.EventHandler();
+          },
+
+          NewPlayer: function(){
+              var _this = this;
+              this.Player = new YT.Player(player_id, {});
+              _this.Player.$element = $('#' + player_id);
+          },
+
+          Play: function(){
+              if( this.Player.getPlayerState() === 1 ) return;
+              this.Player.playVideo();
+          },
+
+          Pause: function(){
+              if( this.Player.getPlayerState() === 2 ) return;
+              this.Player.pauseVideo();
+          },
+
+          ScrollControl: function(){
+              if( Utils.IsElementInViewport(this.Player.$element[0]) ) this.Play();
+              else this.Pause();
+          },
+
+          EventHandler: function(){
+              var _this = this;
+              $(window).on('scroll', function(){
+                  _this.ScrollControl();
+              });
+          }
+      };
+      var Utils = {
+          /** @author http://stackoverflow.com/a/7557433/1684970 */
+          IsElementInViewport: function(el){
+              if (typeof jQuery === "function" && el instanceof jQuery) el = el[0];
+              var rect = el.getBoundingClientRect();
+              return (
+                      rect.top >= 0 &&
+                      rect.left >= 0 &&
+                      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+              );
+          }
+      };
+      return Program.Init();
+  };
+  LoadVideo('playerA');
+  LoadVideo('playerB');
+  LoadVideo('playerC');
+}//]]>
