@@ -33,6 +33,11 @@ img {
   height: auto;
   max-width: 100%;
 }
+.img2 {
+  -webkit-backface-visibility: hidden;
+  height: auto;
+  max-width: 70%;
+}
 ul {
   margin: 0px;
   padding: 0px;
