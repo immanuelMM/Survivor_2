@@ -163,4 +163,4 @@ window.onload=function(){
   LoadVideo('playerA');
   LoadVideo('playerB');
   LoadVideo('playerC');
-}//]]>
+}
